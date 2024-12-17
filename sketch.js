@@ -54,6 +54,13 @@ function draw() {
   // Add "PillowTalk" text at the center of the page
   fill(255); // White color for the text
   textSize(64); // Larger text size for "PillowTalk"
+  textStyle(BOLD); // Make the text bold
+  
+  // Optional: Add a slight shadow for the text to improve visibility
+  // Shadow effect
+  fill(0, 0, 0, 150); // Shadow in black with transparency
+  text("PillowTalk", width / 2 + 4, height / 2 + 4); // Draw shadow
+  fill(255); // White color for the main text
   text("PillowTalk", width / 2, height / 2); // Draw the text at the center
 }
 
