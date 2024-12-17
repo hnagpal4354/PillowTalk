@@ -2,23 +2,24 @@ let pillows = []; // Array to store flying pillow objects
 let pillowEmoji = '🛏️'; // Emoji for the flying pillow
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); // Make canvas fill the window
-  noSmooth(); // Avoid anti-aliasing
-  noStroke(); // Remove any outline
+  // Create a canvas that exactly matches the window size
+  createCanvas(windowWidth, windowHeight);
 
-  // Fix white borders by directly styling the canvas
+  // Fix canvas and body styling
   let canvas = document.querySelector('canvas');
-  canvas.style.position = 'absolute'; // Position canvas at the very top
+  canvas.style.position = 'fixed'; // Ensure the canvas stays fixed to the viewport
   canvas.style.top = '0';
   canvas.style.left = '0';
   canvas.style.margin = '0';
   canvas.style.padding = '0';
-  canvas.style.border = 'none'; // Explicitly remove border
+  canvas.style.border = 'none';
 
-  // Remove scrollbars
-  document.body.style.overflow = 'hidden'; 
-  document.body.style.margin = '0'; // Remove body margin
-  document.body.style.padding = '0'; // Remove body padding
+  // Remove default margin, padding, and overflow from body and html
+  document.body.style.margin = '0';
+  document.body.style.padding = '0';
+  document.body.style.overflow = 'hidden'; // Prevent scrollbars
+  document.documentElement.style.margin = '0';
+  document.documentElement.style.padding = '0';
 
   // Create multiple pillows with random positions and velocities
   for (let i = 0; i < 20; i++) {
@@ -39,12 +40,9 @@ function draw() {
 
   // Draw and update each pillow
   for (let pillow of pillows) {
-    // Draw the pillow emoji at its position
-    text(pillowEmoji, pillow.x, pillow.y);
-
-    // Update the position
-    pillow.x += pillow.vx;
-    pillow.y += pillow.vy;
+    text(pillowEmoji, pillow.x, pillow.y); // Draw the pillow emoji
+    pillow.x += pillow.vx; // Update horizontal position
+    pillow.y += pillow.vy; // Update vertical position
 
     // Wrap around the edges
     if (pillow.x < 0) pillow.x = width;
@@ -52,9 +50,14 @@ function draw() {
     if (pillow.y < 0) pillow.y = height;
     if (pillow.y > height) pillow.y = 0;
   }
+
+  // Add "PillowTalk" text at the center of the page
+  fill(255); // White color for the text
+  textSize(64); // Larger text size for "PillowTalk"
+  text("PillowTalk", width / 2, height / 2); // Draw the text at the center
 }
 
-// Handle browser window resizing
+// Ensure the canvas resizes properly when the browser window is resized
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); // Resize canvas when the window size changes
+  resizeCanvas(windowWidth, windowHeight); // Adjust the canvas to match the new window size
 }
