@@ -5,10 +5,18 @@ function setup() {
   createCanvas(windowWidth, windowHeight); // Make canvas fill the window
   noSmooth(); // Avoid anti-aliasing
   noStroke(); // Remove any outline
-  
-  // Remove white space by styling the canvas
+
+  // Fix white borders by directly styling the canvas
   let canvas = document.querySelector('canvas');
-  canvas.style.display = 'block'; // Remove inline canvas padding
+  canvas.style.position = 'absolute'; // Position canvas at the very top
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.margin = '0';
+  canvas.style.padding = '0';
+  canvas.style.border = 'none'; // Explicitly remove border
+
+  // Remove scrollbars
+  document.body.style.overflow = 'hidden'; 
   document.body.style.margin = '0'; // Remove body margin
   document.body.style.padding = '0'; // Remove body padding
 
