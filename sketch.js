@@ -2,7 +2,15 @@ let pillows = []; // Array to store flying pillow objects
 let pillowEmoji = '🛏️'; // Emoji for the flying pillow
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight); // Make canvas fill the window
+  noSmooth(); // Avoid anti-aliasing
+  noStroke(); // Remove any outline
+  
+  // Remove white space by styling the canvas
+  let canvas = document.querySelector('canvas');
+  canvas.style.display = 'block'; // Remove inline canvas padding
+  document.body.style.margin = '0'; // Remove body margin
+  document.body.style.padding = '0'; // Remove body padding
 
   // Create multiple pillows with random positions and velocities
   for (let i = 0; i < 20; i++) {
@@ -36,4 +44,9 @@ function draw() {
     if (pillow.y < 0) pillow.y = height;
     if (pillow.y > height) pillow.y = 0;
   }
+}
+
+// Handle browser window resizing
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight); // Resize canvas when the window size changes
 }
